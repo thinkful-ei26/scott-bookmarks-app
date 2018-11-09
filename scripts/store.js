@@ -5,30 +5,31 @@
 const store = (function(){
   function addBookmark(bookmark) {
     //validation here?
+    this.bookmarks.push(bookmark);
   }
 
   function toggleAddingBookmark() {
-
+    this.adding = !this.adding;
   }
 
   function findById(bookmarkObjId) {
-
+    return this.bookmarks.find(bookmark => bookmark.id === bookmarkObjId);
   }
 
   function findAndDeleteBookmark(bookmarkObjId) {
-
+    this.bookmarks.find(bookmark => bookmark.id !== bookmarkObjId);
   }
 
   function toggleBookmarkView(bookmarkObjId) {
-
+    this.findById(bookmarkObjId).condensed = !this.findById(bookmarkObjId).condensed;
   }
 
   function setError(error) {
-
+    this.error = error;
   }
 
   function setRatingFilter(val) {
-
+    this.filter = val;
   }
 
   function storeTest(){
@@ -39,6 +40,7 @@ const store = (function(){
     adding: false,
     filter: null,
     error: null,
+    condensed: true,
 
     addBookmark,
     toggleAddingBookmark,
