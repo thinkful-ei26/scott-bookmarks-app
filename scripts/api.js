@@ -25,8 +25,7 @@ const api = (function(){
     console.log('deleteBookmark fired');
     $.ajax({
       url: `${BASE_URL}/${id}`,
-      method: 'POST',
-      contentType: 'application/json',
+      method: 'DELETE',
       success: successfn,
     });
   }
