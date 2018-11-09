@@ -5,17 +5,23 @@ const api = (function(){
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/scott/bookmarks';
 
   function getBookmarks(callbackfn) {
-    $.getJSON(`${BASE_URL}`, callbackfn);
     console.log('getting bookmarks from server');
+    $.ajax({
+      url: `${BASE_URL}`,
+      method: 'GET',
+      contentType: 'application/json',
+      success: callbackfn,
+    });
   }
 
   function createBookmark(newbookmarkObj, successfn, errorfn) {
+    console.log('createBookmark fired');
     console.log(newbookmarkObj);
     $.ajax({
       url: `${BASE_URL}`,
       method: 'POST',
       contentType: 'application/json',
-      data: newbookmarkObj,
+      data: JSON.stringify(newbookmarkObj),
       success: successfn,
       error: errorfn,
     });

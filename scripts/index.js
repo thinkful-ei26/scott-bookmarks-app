@@ -6,6 +6,15 @@ function main() {
   api.apiTest();
   bookmarks.bookmarksTest();
   store.storeTest();
+  bookmarks.bindEventListeners();
+  bookmarks.render();
+
+  api.getBookmarks((bookmark) => {
+    console.log(bookmark);
+
+    bookmark.forEach(item => store.addBookmark(item));
+    bookmarks.render();
+  });
 }
 
 $(main);

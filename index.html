@@ -20,6 +20,8 @@
           <button class="add-bookmark-button js-add-bookmark-button" type="button" name="button">
             add bookmark
           </button>
+          <div class="add-bookmark-form js-add-bookmark-form">
+          </div>
         </div>
 
         <div class="row">
@@ -36,49 +38,13 @@
             </form>
           </div>
         </div>
-        <!-- this part only appears when add bookmark button clicked -->
-        <div class="row">
-          <div class="add-bookmark-form js-add-bookmark-form">
-          <form>
-            <input type="text" name="title" value="bookmark title"><br />
-            <input type="text" name="url" value="url"><br />
-            <textarea name="description" rows="8" cols="50">put your description here</textarea><br />
-            <label for="rating">rating:</label>
-            <input type="radio" name="rating" value="1">1
-            <input type="radio" name="rating" value="2">2
-            <input type="radio" name="rating" value="3">3
-            <input type="radio" name="rating" value="4">4
-            <input type="radio" name="rating" value="5">5
-            <br />
-            <input type="submit" value="Submit">
-          </form>
-        </div>
 
         <div class="row">
-          <div class="">
-            <ul>
-              <!-- not expanded bookmark-->
-              <li>
-                <div>
-                  <h3>bookmark.title</h3>
-                  <div class="rating">bookmark.rating</div>
-                </div>
-              </li>
-              <!-- expanded bookmark-->
-              <li class="bookmark-item js-bookmark-item">
-                <h3>bookmark.title</h3>
-                <div class="rating">bookmark.rating</div>
 
-
-                <button class="bookmark-delete js-bookmark-delete">delete</button>
-                <p>bookmark.desctiption body</p>
-                <a href="bookmark.url">visit site</a>
-                </div>
-              </li>
-
+            <ul class="bookmarks js-bookmarks">
             </ul>
-          </div>
-        </div>
+
+      </div>
 
       </main>
     </div>

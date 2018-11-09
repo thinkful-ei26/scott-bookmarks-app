@@ -4,7 +4,6 @@
 // eslint-disable-next-line no-unused-vars
 const store = (function(){
   function addBookmark(bookmark) {
-    //validation here?
     this.bookmarks.push(bookmark);
   }
 
