@@ -127,7 +127,24 @@ const bookmarks = (function(){
   }
 
   function handleDeleteBookmarkClick() {
+    console.log('handleDeleteBookmarkClick fired');
+    $('.js-bookmark-delete').on( 'click',  event => {
+      console.log('handleDeleteBookmarkClick was clicked');
 
+      const id = getIdFromBookmarkElem(event.target);
+
+      api.deleteBookmark(id,
+        bookmark => {
+          store.findAndDeleteBookmark(bookmark);
+          render();
+        },
+        (err) => {
+          console.log(err);
+          store.setError(err);
+          render();
+        }
+      );
+    });
   }
 
   function handleExpandBookmarkClick() {
