@@ -6,6 +6,12 @@ const bookmarks = (function(){
 
   function render() {
     console.log('render fired');
+    if (store.error) {
+      const el = generateError(store.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
     const bookmarks = [ ...store.bookmarks ];
     console.log(bookmarks);
     $('ul').html(generateBookmarkListString(bookmarks));
@@ -33,9 +39,9 @@ const bookmarks = (function(){
     return `
     <div class="row">
       <form>
-        <input type="text" name="title" value="bookmark title"><br />
-        <input type="text" name="url" value="http://"><br />
-        <textarea name="description" rows="8" cols="50">put your description here</textarea><br />
+        <input type="text" name="title" placeholder="bookmark title"><br />
+        <input type="text" name="url" placeholder="url"><br />
+        <textarea name="description" rows="8" cols="50" placeholder="put your description here"></textarea><br />
         <label for="rating">rating:</label>
         <input type="radio" name="rating" value="1">1
         <input type="radio" name="rating" value="2">2
@@ -45,7 +51,7 @@ const bookmarks = (function(){
         <br />
 
         <input type="submit" value="Submit">
-        <section class="error-message js-error-message">
+
         <div class="error-container"></div>
         </section>
       </form>
