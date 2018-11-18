@@ -1,19 +1,24 @@
 'use strict';
 /*eslint-env jquery*/
+// eslint-disable-next-line no-unused-vars
 /* global index, store, api */
 // eslint-disable-next-line no-unused-vars
 const bookmarks = (function(){
 
   function render() {
-    console.log('render fired');
+    //console.log('render fired');
+    let bookmarks = [ ...store.bookmarks ];
+    if (store.filter){
+      bookmarks = bookmarks.filter(item => item.rating >= store.filter);
+    }
     if (store.error) {
       const el = generateError(store.error);
       $('.error-container').html(el);
-    } else {
+    }else{
       $('.error-container').empty();
     }
-    const bookmarks = [ ...store.bookmarks ];
-    console.log(bookmarks);
+
+    //console.log(bookmarks);
     $('ul').html(generateBookmarkListString(bookmarks));
 
 
@@ -22,8 +27,7 @@ const bookmarks = (function(){
   const renderAddBookmarkForm = function() {
     if(store.adding){
       $('.js-add-bookmark-form').html(generateAddNewBookmarkForm());
-    }
-    else{
+    }else{
       $('.js-add-bookmark-form').html('');
     }
   };
@@ -32,7 +36,7 @@ const bookmarks = (function(){
     let message = '';
     if (error.responseJSON && error.responseJSON.message) {
       message = error.responseJSON.message;
-    } else {
+    }else{
       message = `${error.code} Server Error`;
     }
 
@@ -48,9 +52,9 @@ const bookmarks = (function(){
     return `
     <div class="row">
       <form>
-        <input type="text" name="title" placeholder="bookmark title"><br />
-        <input type="text" name="url" placeholder="url"><br />
-        <textarea name="desc" rows="8" cols="50" placeholder="put your description here"></textarea><br />
+        <input type="text" name="title" placeholder="bookmark title" required><br />
+        <input type="text" name="url" placeholder="url" required><br />
+        <textarea name="desc" rows="8" cols="50" placeholder="put your description here" required></textarea><br />
         <label for="rating">rating:</label>
         <input type="radio" name="rating" value="1" required>1
         <input type="radio" name="rating" value="2">2
@@ -70,24 +74,24 @@ const bookmarks = (function(){
   }
 
   function generateBookmarkLi(bookmark) {
-    console.log('generateBookmarkLi fired');
+    //console.log('generateBookmarkLi fired');
 
     if (bookmark.condensed) {
       return  `
         <li class="bookmark-item js-bookmark-item" data-bookmark-id = "${bookmark.id}">
           <div>
             <h3>${bookmark.title}</h3>
-            <div class="rating">${bookmark.rating} stars</div>
+            <div class="rating">${bookmark.rating} star(s)</div>
           </div>
         </li>
         `;
     }else{
-      console.log(bookmark);
+      //console.log(bookmark);
       return `
       <li class="bookmark-item js-bookmark-item" data-bookmark-id = "${bookmark.id}">
         <h3>${bookmark.title}</h3>
         <div class="rating">${bookmark.rating} star(s)</div>
-        <button class="bookmark-delete js-bookmark-delete" type="button" name="button">delete</button>
+        <button class="bookmark-delete js-bookmark-delete" type="button" name="button" aria-label = "delete bookmark">delete</button>
         <p>${bookmark.desc}</p>
         <a href="${bookmark.url}">visit site</a>
         </div>
@@ -101,8 +105,8 @@ const bookmarks = (function(){
   }
 
   function getIdFromBookmarkElem(bookmark) {
-    console.log(bookmark);
-    console.log($(bookmark).closest('.js-bookmark-item'));
+    //console.log(bookmark);
+    //console.log($(bookmark).closest('.js-bookmark-item'));
     return $(bookmark).closest('.js-bookmark-item').data('bookmark-id');
   }
 
@@ -110,8 +114,8 @@ const bookmarks = (function(){
   ///////////listeners
 
   function handleAddNewBookmarkFormClick() {
-    $('.js-add-bookmark-button').on('click', event => {
-      console.log('handleAddNewBookmarkFormClick was clicked');
+    $('.js-add-bookmark-button').on('click', () => {
+    //  console.log('handleAddNewBookmarkFormClick was clicked');
       store.toggleAddingBookmark();
       $('.js-add-bookmark-form').html(generateAddNewBookmarkForm());
     });
@@ -129,7 +133,7 @@ const bookmarks = (function(){
         render();
       },
       (err) => {
-        console.log(err);
+        //console.log(err);
         store.setError(err);
         render();
       }
@@ -138,18 +142,18 @@ const bookmarks = (function(){
   }
 
   function handleDeleteBookmarkClick() {
-    console.log('handleDeleteBookmarkClick fired');
+  //  console.log('handleDeleteBookmarkClick fired');
     $('.js-bookmarks').on( 'click', '.js-bookmark-delete',  event => {
-      console.log('handleDeleteBookmarkClick was clicked');
+    //  console.log('handleDeleteBookmarkClick was clicked');
       const id = getIdFromBookmarkElem(event.target);
-      console.log(id);
+      //  console.log(id);
       api.deleteBookmark(id, () => {
-        console.log(id);
+        //    console.log(id);
         store.findAndDeleteBookmark(id);
         render();
       },
       (err) => {
-        console.log(err);
+        //console.log(err);
         store.setError(err);
         render();
       }
@@ -166,7 +170,11 @@ const bookmarks = (function(){
   }
 
   function handleRatingsFilter() {
-
+    $('.js-filter-select').change( () => {
+      const rating = $('.js-filter-select').val();
+      store.setRatingFilter(rating);
+      render();
+    });
   }
 
   $.fn.extend({
@@ -190,7 +198,7 @@ const bookmarks = (function(){
   }
 
   function bookmarksTest(){
-    console.log('hello from bookmarks');
+  //  console.log('hello from bookmarks');
   }
   return {
     render,

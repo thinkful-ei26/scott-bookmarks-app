@@ -2,12 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bookmark App</title>
     <link rel="stylesheet" href="styles/index.css">
   </head>
   <body>
     <div class="header-container">
-      <div class="row">
+      <div class="row" role="banner">
         <header>
           <h1>bookmarks</h1>
         </header>
@@ -17,7 +18,7 @@
       <main>
 
         <div class="row">
-          <button class="add-bookmark-button js-add-bookmark-button" type="button" name="button">
+          <button class="add-bookmark-button js-add-bookmark-button" type="button" name="button"aria-label = "add bookmark">
             add bookmark
           </button>
           <div class="add-bookmark-form js-add-bookmark-form">
@@ -26,15 +27,19 @@
 
         <div class="row">
           <div class="filter">
-            <form class="filter-form" action="index.html" method="post">
-              <label for="filter">filter:</label>
-              <select class="filter-select js-filter-select" name="filter" id="filter">
-                <option value="1">1 star</option>
-                <option value="1">2 stars</option>
-                <option value="3">3 stars</option>
-                <option value="4">4 stars</option>
-                <option value="5">5 stars</option>
-              </select>
+
+            <form class="filter-form" action="index.html" method="post" >
+              <fieldset>
+                <label for="filter" aria-live = "polite" aria-label="filter dropdown">filter:</label>
+                <select class="filter-select js-filter-select" name="filter" id="filter" aria-controls="Rating filter">
+                  <option value="" disabled selected>choose</option>
+                  <option value="1">1 star</option>
+                  <option value="2">2 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="4">4 stars</option>
+                  <option value="5">5 stars</option>
+                </select>
+              </fieldset>
             </form>
           </div>
         </div>

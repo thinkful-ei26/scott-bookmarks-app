@@ -21,6 +21,11 @@ html, body{
   width: inherit;
 
 }
+
+fieldset {
+  border: none;
+}
+
 ul{
   list-style-type: none;
   padding: 0;
