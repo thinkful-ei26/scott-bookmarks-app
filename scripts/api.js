@@ -32,6 +32,7 @@ const api = (function(){
     $.ajax({
       url: `${BASE_URL}/${id}`,
       method: 'DELETE',
+      
       success: successfn,
     });
   }

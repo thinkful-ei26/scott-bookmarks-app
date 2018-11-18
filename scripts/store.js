@@ -16,7 +16,7 @@ const store = (function(){
   }
 
   function findAndDeleteBookmark(bookmarkObjId) {
-    this.bookmarks.filter(bookmark => bookmark.id !== bookmarkObjId);
+    this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== bookmarkObjId);
   }
 
   function toggleBookmarkView(bookmarkObjId) {

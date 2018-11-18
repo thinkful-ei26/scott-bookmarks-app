@@ -12,7 +12,10 @@ function main() {
   api.getBookmarks((bookmark) => {
     console.log(bookmark);
 
-    bookmark.forEach(item => store.addBookmark(item));
+    bookmark.forEach(item => {
+      item.condensed = true;
+      store.addBookmark(item);
+    });
     bookmarks.render();
   });
 }
