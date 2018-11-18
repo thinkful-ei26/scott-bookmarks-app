@@ -2,7 +2,7 @@
 /* global bookmarks, store, api */
 /*eslint-env jquery*/
 function main() {
-  console.log('Document is ready');
+  //console.log('Document is ready');
   api.apiTest();
   bookmarks.bookmarksTest();
   store.storeTest();
@@ -10,7 +10,7 @@ function main() {
   bookmarks.render();
 
   api.getBookmarks((bookmark) => {
-    console.log(bookmark);
+    //console.log(bookmark);
 
     bookmark.forEach(item => {
       item.condensed = true;

@@ -1,4 +1,5 @@
 'use strict';
+// eslint-disable-next-line no-unused-vars
 /* global bookmarks, api */
 /*eslint-env jquery*/
 // eslint-disable-next-line no-unused-vars
@@ -32,7 +33,7 @@ const store = (function(){
   }
 
   function storeTest(){
-    console.log('hello from store');
+    //console.log('hello from store');
   }
   return {
     bookmarks: [],
